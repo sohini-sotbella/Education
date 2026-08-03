@@ -14,10 +14,20 @@
     justify-content: space-evenly;
     align-items: center;
     padding: 30px 0;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.subscribe-form-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .subscribe-btn {
     position: relative;
+    width: 100%;
+    max-width: 580px;
 }
 
 .subscribe-btn button {
@@ -28,12 +38,23 @@
     top: 7.5px;
     right: 7.5px;
     bottom: 0;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 14px;
 }
 
 .subscribe-btn input {
     height: 60px;
-    width: 600px;
+    width: 100%;
     padding-left: 50px;
+    padding-right: 145px;
+    box-sizing: border-box;
+    font-size: 15px;
+    border: none;
+    outline: none;
 }
 
 .subscribe-icon {
@@ -44,9 +65,53 @@
     margin: 20px 10px;
 }
 
+.thank-you-message {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 30px;
+    background: linear-gradient(135deg, #26c976 0%, #1aaa63 100%);
+    color: white;
+    border-radius: 12px;
+    text-align: left;
+    animation: fadeInScale 0.5s ease;
+    box-shadow: 0 4px 20px rgba(38, 201, 118, 0.35);
+    min-width: 340px;
+}
+
+.thank-you-icon {
+    font-size: 42px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+}
+
+.thank-you-title {
+    margin: 0 0 4px 0;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+}
+
+.thank-you-sub {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.88;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.92) translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
 .footer-top {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 30px;
     border-top: 0.5px solid #e4e1e1;
     padding: 50px 0;
@@ -103,6 +168,7 @@
 
     .footer-top {
         padding: 40px 0;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .footer-bottom {
@@ -126,61 +192,87 @@
     }
 
     .subscribe-btn {
-        width: 100%;
+        max-width: 100%;
     }
 
     .subscribe-btn button {
-        background-color: #26c976;
         height: 40px;
-        padding: 5px 10px;
-        position: absolute;
+        padding: 5px 12px;
         top: 5px;
         right: 5px;
-        bottom: 0;
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .subscribe-btn input {
         height: 50px;
-        width: 100%;
         padding-left: 40px;
+        padding-right: 130px;
         font-size: 14px;
     }
 
     .subscribe-icon {
         font-size: 16px;
-        margin: 18px 10px;
+        margin: 17px 10px;
+    }
+
+    .thank-you-message {
+        min-width: unset;
+        width: 100%;
+        padding: 16px 20px;
+    }
+
+    .thank-you-title {
+        font-size: 17px;
     }
 }
 
 
 
 @media (max-width: 480px) {
+    .footer-container {
+        padding: 30px 20px;
+    }
+
     .footer-top {
         padding: 20px 0;
+        grid-template-columns: 1fr;
     }
 
     .subscribe-header h1 {
         font-size: 18px;
-     }
+    }
 
     .footer-bottom {
         padding: 20px;
     }
 
     .subscribe-btn button {
-        height: 35px;
-        font-size: 12px;
+        height: 34px;
+        font-size: 11px;
+        padding: 4px 8px;
     }
 
     .subscribe-btn input {
-        height: 45px;
-        padding-left: 30px;
+        height: 46px;
+        padding-left: 32px;
+        padding-right: 110px;
         font-size: 12px;
     }
 
     .subscribe-icon {
         font-size: 14px;
-        margin: 17px 10px;
+        margin: 16px 8px;
+    }
+
+    .thank-you-icon {
+        font-size: 32px;
+    }
+
+    .thank-you-title {
+        font-size: 15px;
+    }
+
+    .thank-you-sub {
+        font-size: 12px;
     }
 }

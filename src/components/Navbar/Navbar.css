@@ -1,68 +1,143 @@
-/* page dropdown start */
+/* ========== PAGES DROPDOWN — Clean List ========== */
+
+.pages-li-div {
+    position: relative;
+}
+
+.pages-li {
+    position: static !important;
+}
+
+.pages-trigger {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    user-select: none;
+}
+
+.pages-chevron {
+    font-size: 11px;
+    transition: transform 0.3s ease;
+    color: #f16126;
+}
+
+.pages-chevron.rotated {
+    transform: rotate(180deg);
+}
+
 .pages-dropdown {
     position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    top: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    background: #ffffff;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.12),
+        0 2px 8px rgba(241, 97, 38, 0.08);
     z-index: 1000;
-    display: none;
-    border-top: 1px solid #c4c2c2;
-    border-left: 1px solid #c4c2c2;
-    border-right: 1px solid #c4c2c2;
-}
-
-.pages-dropdown-link {
-    display: block;
-    padding: 8px 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
+    border-radius: 12px;
+    border: 1px solid rgba(241, 97, 38, 0.12);
     width: 150px;
-    text-decoration: none;
-    color: #333333;
-    font-size: 16px;
-    border-bottom: 1px solid #c4c2c2;
+    overflow: hidden;
+    padding: 6px 0;
 }
 
-.pages-dropdown-link:hover {
-    background-color: #f16126;
-    color: #fff;
+/* Arrow pointer at top */
+.pages-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #fff;
+    filter: drop-shadow(0 -2px 2px rgba(0,0,0,0.06));
 }
 
-.li-div:hover .pages-dropdown {
+.pages-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.pages-dropdown-item {
     display: block;
+    padding: 11px 22px;
+    text-decoration: none;
+    color: #2d2d2d;
+    font-size: 15px;
+    font-weight: 600;
+    border-left: 3px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 
+.pages-dropdown-item:hover {
+    color: #f16126;
+    border-left-color: #f16126;
+    background: #fff8f5;
+}
+
+/* Mobile: pages dropdown overrides */
 @media screen and (max-width: 1040px) {
     .pages-dropdown {
-        display: block;
         position: static;
         width: 100%;
-        left: 0;
-        top: auto;
-        transform: none;
+        transform: none !important;
+        left: auto;
         opacity: 1;
         visibility: visible;
         border: none;
         box-shadow: none;
-        background-color: #f16126;
-        padding-top: 10px;
+        border-radius: 0;
+        background: transparent;
+        padding: 0;
+        /* Smooth slide down via max-height */
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        display: block !important;
     }
 
-    .pages-dropdown-link {
-        width: 100%;
-        padding: 8px 0;
-        font-weight: bold;
+    .pages-dropdown.show {
+        max-height: 300px;
+    }
+
+    .pages-dropdown::before {
+        display: none;
+    }
+
+    .pages-dropdown-item {
         color: #fff;
-        border: none;
+        border-left-color: transparent;
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .pages-dropdown-item:hover {
+        color: #fff;
+        border-left-color: #fff;
+        background: transparent;
+    }
+
+    .pages-chevron {
+        color: #fff;
     }
 }
 
 @media screen and (max-width: 528px) {
-    .pages-dropdown-link {
-        font-size: 14px;
+    .pages-dropdown-item {
+        font-size: 13px;
     }
 }
 
-/* pages dropdown end */
+/* ========== PAGES DROPDOWN END ========== */
+
+
 
 .navbar-container {
     border: 0.1px solid #fff;
@@ -86,7 +161,7 @@
     position: fixed;
     top: 0;
     z-index: 1001;
-    background-color: transparent;
+    background-color: white;
     transition: top 0.3s;
 }
 
@@ -303,6 +378,23 @@ nav {
         width: 100%;
         justify-content: space-between;
         padding: 8px;
+    }
+
+    /* Pages li-div must stack vertically so dropdown sits below */
+    .pages-li-div {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 8px;
+    }
+
+    .pages-li {
+        width: 100%;
+        padding: 8px;
+    }
+
+    .pages-trigger {
+        justify-content: space-between;
+        width: 100%;
     }
 
     .navbar {

@@ -24,7 +24,7 @@
 
 .contact-container {
     background-color: #fff9ef;
-    padding: 50px;    
+    padding: 50px;
 }
 
 .contact-header h3 {
@@ -42,71 +42,83 @@
     text-align: center;
 }
 
-.map-section{
+.map-section {
     display: flex;
 }
 
-.map-container iframe{
+.map-container iframe {
     width: 100%;
     width: 700px;
-    height: 350px; 
-    border: 10px solid #fff; 
+    height: 350px;
+    border: 10px solid #fff;
     border-radius: 5px;
     margin: 60px 0;
 }
 
-.contact-through{
+.contact-through {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-left: 50px;
 }
 
-.contact-div{
+.contact-div {
     background-color: #fff;
     padding: 15px;
     margin: 10px 0;
 }
 
-.contact-div .row-td{
+.contact-div .row-td {
     height: auto;
     width: 35px;
 }
 
-.contact-div tr,td{
-    padding: 3px 5px;    
+.contact-div tr,
+td {
+    padding: 3px 5px;
 }
 
-.contact-div h2{
+.contact-div h2 {
     font-weight: bold;
     font-size: 18px;
 }
 
 .contactus-container {
-    padding: 100px;    
+    padding: 100px;
 }
 
-.inner-container{
+.contact-us {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
-    margin: 0 200px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-.name-email-mobile-sub{
+.inner-container form {
+    width: 100%;
+}
+
+.name-email-mobile-sub {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
 }
 
-.name-email-mobile-sub div{
+.name-email-mobile-sub div {
     width: 100%;
     margin: 0 10px;
 }
 
-.name-email-mobile-sub input{
+.name-email-mobile-sub input {
     border: 1px solid rgba(255, 255, 255, 0.2);
     background-color: transparent;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -117,11 +129,11 @@
     outline: none;
 }
 
-.inner-container textarea{
+.inner-container textarea {
     border: 1px solid rgba(255, 255, 255, 0.2);
     background-color: transparent;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    margin: 15px;
+    margin: 10px;
     height: 250px;
     width: 97%;
     padding: 10px;
@@ -129,21 +141,54 @@
     color: #391965;
 }
 
-.inner-container button{
-    margin: 20px 0;
+.inner-container button {
+    margin: 10px;
     height: 50px;
     padding: 10px 30px;
     background-color: #f16126;
     border-radius: 5px;
 }
 
-.inner-container button a{
+.inner-container button a {
     color: #fff;
     font-weight: bold;
 }
 
+.inner-container button {
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.success-message {
+    margin-top: 20px;
+    padding: 15px 20px;
+    background-color: #26c976;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    animation: slideIn 0.5s ease;
+}
+
+.success-message p {
+    margin: 0;
+    font-weight: bold;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @media (max-width: 1200px) {
-    .inner-container{
+    .inner-container {
         margin: 0 100px;
     }
 }
@@ -156,67 +201,67 @@
     .top-bg-contact-container h1 {
         font-size: 28px;
     }
-    
+
     .contact-header h3 {
         color: #f16126;
         font-weight: bold;
         margin-bottom: 10px;
         text-align: center;
     }
-    
+
     .contact-header h1 {
         margin-bottom: 20px;
         font-size: 36px;
         padding: 0 100px;
     }
-    
-    .map-section{
+
+    .map-section {
         flex-direction: column;
     }
 
-    .map-container{
+    .map-container {
         display: flex;
         justify-content: center;
     }
-    
-    .map-container iframe{
+
+    .map-container iframe {
         width: 900px;
         height: 300px;
     }
-    
-    .contact-through{
+
+    .contact-through {
         margin: 0 5px;
-    }    
+    }
 
     .contactus-container {
-        padding: 80px 40px;    
+        padding: 80px 40px;
     }
-    
-    .inner-container{
+
+    .inner-container {
         margin: 0 50px;
     }
-    
-    .name-email-mobile-sub input{        
+
+    .name-email-mobile-sub input {
         margin: 8px 0;
         height: 45px;
         padding: 8px;
     }
-    
-    .inner-container textarea{
+
+    .inner-container textarea {
         margin: 10px;
         height: 200px;
         padding: 8px;
     }
-    
-    .inner-container button{
+
+    .inner-container button {
         margin: 15px 0;
         height: 45px;
         padding: 8px 25px;
     }
-    
-    .inner-container button a{
+
+    .inner-container button a {
         font-size: 14px;
-    }    
+    }
 }
 
 @media (max-width: 768px) {
@@ -229,66 +274,66 @@
     }
 
     .contact-container {
-        padding: 40px;    
+        padding: 40px;
     }
-    
+
     .contact-header h1 {
         margin-bottom: 10px;
         font-size: 28px;
         padding: 0 50px;
     }
-    
-    .map-container iframe{        
-        height: 250px; 
-        border: 8px solid #fff; 
+
+    .map-container iframe {
+        height: 250px;
+        border: 8px solid #fff;
         margin: 30px 0;
     }
-    
-    .contact-div{
+
+    .contact-div {
         padding: 10px;
         margin: 5px 0;
-    } 
+    }
 
-    .contact-div h2{
+    .contact-div h2 {
         font-size: 16px;
     }
 
-    .contact-div span{
+    .contact-div span {
         font-size: 14px;
     }
 
     .contactus-container {
-        padding: 50px 30px;    
+        padding: 50px 30px;
     }
-    
-    .inner-container{
+
+    .inner-container {
         margin: 0 20px;
     }
-    
-    .name-email-mobile-sub input{        
+
+    .name-email-mobile-sub input {
         margin: 5px 0;
         height: 35px;
         padding: 0 5px;
         font-size: 14px;
     }
-    
-    .inner-container textarea{
+
+    .inner-container textarea {
         margin: 5px;
         height: 150px;
         padding: 5px;
         width: 96%;
         font-size: 14px;
     }
-    
-    .inner-container button{
+
+    .inner-container button {
         margin: 10px 0;
         height: 35px;
         padding: 0 15px 3px 15px;
     }
-    
-    .inner-container button a{
+
+    .inner-container button a {
         font-size: 12px;
-    } 
+    }
 }
 
 @media (max-width: 480px) {
@@ -297,61 +342,62 @@
     }
 
     .contact-container {
-        padding: 20px;    
+        padding: 20px;
     }
-    
+
     .contact-header h1 {
         margin-bottom: 5px;
         font-size: 24px;
         padding: 0 20px;
     }
-    
-    .map-container iframe{        
-        height: 180px; 
-        border: 6px solid #fff; 
+
+    .map-container iframe {
+        height: 180px;
+        border: 6px solid #fff;
         margin: 20px 0;
     }
 
-    .contact-div h2{
+    .contact-div h2 {
         font-size: 14px;
     }
 
-    .contact-div span{
+    .contact-div span {
         font-size: 12px;
     }
 
-    .contact-div .row-td{
+    .contact-div .row-td {
         width: 30px;
     }
-    
-    .contact-div tr,td{
-        padding: 0 5px;    
+
+    .contact-div tr,
+    td {
+        padding: 0 5px;
     }
 
     .contactus-container {
-        padding: 40px 20px;    
+        padding: 40px 20px;
     }
-    
-    .inner-container{
+
+    .inner-container {
         margin: 0px;
     }
 
-    .name-email-mobile-sub{
+    .name-email-mobile-sub {
         flex-direction: column;
     }
-    
-    .name-email-mobile-sub input{
+
+    .name-email-mobile-sub input {
         height: 35px;
         padding: 0 5px;
         font-size: 14px;
     }
-    
-    .inner-container textarea{
+
+    .inner-container textarea {
         margin: 5px;
         height: 150px;
         padding: 5px;
         width: 100%;
         font-size: 14px;
     }
-      
+
 }

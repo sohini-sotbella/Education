@@ -14,12 +14,13 @@ import Profile from './components/Register-Login/Profile';
 import Contact from './components/Contact/Contact';
 import FZFError from './components/Error/FZFError';
 import Instructor from './components/Instructor/Instructor';
-
+import ScrollToTop from './components/ScrollToTop';
 
 
 const App = () => {
   return (
     <Router>
+      <ScrollToTop />
       <Navbar/>
       <Routes>
       <Route path='/' element={<Home/>}/>
@@ -36,8 +37,6 @@ const App = () => {
     </Routes>
     <Footer/>
     </Router>
-    
-
   )
 }
 

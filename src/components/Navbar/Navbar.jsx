@@ -3,8 +3,42 @@ import './Navbar.css';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo/01.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faInfoCircle, faTimes, faUser, faUsers, faPhone, faMapMarkerAlt, faUserPlus, faGlobe } from '@fortawesome/free-solid-svg-icons';
+import {
+    faBars, faInfoCircle, faTimes, faUser, faUsers, faPhone,
+    faMapMarkerAlt, faUserPlus, faGlobe, faChevronDown,
+    faLayerGroup, faChalkboard, faTriangleExclamation
+} from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faInstagram, faLinkedin, faYoutube } from '@fortawesome/free-brands-svg-icons';
+
+const pagesLinks = [
+    {
+        to: '/about',
+        icon: "",
+        label: 'About Us',
+        desc: 'Learn about our mission',
+    },
+    {
+        to: '/creators',
+        icon: "",
+        label: 'Our Team',
+        desc: 'Meet the talented crew',
+    },
+    {
+        to: '/instructor',
+        icon: "",
+        label: 'Instructors',
+        desc: 'Expert educators',
+    },
+    {
+        to: '/error',
+        icon: "",
+        label: '404 Page',
+        desc: 'Error page demo',
+    },
+];
+
+
+
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -12,22 +46,19 @@ const Navbar = () => {
     const [pagesDropdownOpen, setPagesDropdownOpen] = useState(false);
     const [userDropdownOpen, setUserDropdownOpen] = useState(false);
     const navbarRef = useRef(null);
+    const pagesTimeoutRef = useRef(null);
 
 
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (navbarRef.current && !navbarRef.current.contains(event.target)) {
-                // Click outside the navbar
                 setIsOpen(false);
                 setPagesDropdownOpen(false);
                 setUserDropdownOpen(false);
             }
         };
 
-        // Bind the event listener
         document.addEventListener('mousedown', handleClickOutside);
-
-        // Clean up the event listener
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
@@ -39,6 +70,7 @@ const Navbar = () => {
 
     const closeMenu = () => {
         setIsOpen(false);
+        setPagesDropdownOpen(false);
     };
 
     const toggleInfo = () => {
@@ -47,9 +79,23 @@ const Navbar = () => {
         }
     };
 
+    const handlePagesMouseEnter = () => {
+        if (window.innerWidth <= 1040) return;   // desktop hover only
+        clearTimeout(pagesTimeoutRef.current);
+        setPagesDropdownOpen(true);
+        setUserDropdownOpen(false);
+    };
+
+    const handlePagesMouseLeave = () => {
+        if (window.innerWidth <= 1040) return;   // desktop hover only
+        pagesTimeoutRef.current = setTimeout(() => {
+            setPagesDropdownOpen(false);
+        }, 150);
+    };
+
     const togglePagesDropdown = () => {
         setPagesDropdownOpen(!pagesDropdownOpen);
-        setUserDropdownOpen(false); // Close user dropdown if pages dropdown opens
+        setUserDropdownOpen(false);
     };
 
     const closePagesDropdown = () => {
@@ -58,7 +104,7 @@ const Navbar = () => {
 
     const toggleUserDropdown = () => {
         setUserDropdownOpen(!userDropdownOpen);
-        setPagesDropdownOpen(false); // Close pages dropdown if user dropdown opens
+        setPagesDropdownOpen(false);
     };
 
     const closeUserDropdown = () => {
@@ -76,7 +122,7 @@ const Navbar = () => {
                     </div>
 
                     <div className='second-nav'>
-                        <div className='icon-div1'> Find us on: </div>
+                        <div className='icon-div1'>Find us on: </div>
                         <div className='icon-div'><a href='https://ifda.in/'><FontAwesomeIcon icon={faGlobe} className='icon' /></a></div>
                         <div className='icon-div'><a href='https://www.facebook.com/IFDAINSTITUTE/'><FontAwesomeIcon icon={faFacebook} className='icon' /></a></div>
                         <div className='icon-div'><a href='https://www.linkedin.com/company/ifda-institute-delhi/?originalSubdomain=in'><FontAwesomeIcon icon={faLinkedin} className='icon' /></a></div>
@@ -103,19 +149,40 @@ const Navbar = () => {
                         <div className='li-div'>
                             <li><Link className='nav-link' to="/blog" onClick={closeMenu}>Blog</Link></li>
                         </div>
-                        <div className='li-div'>
-                        <li className={pagesDropdownOpen ? 'active' : ''} onMouseEnter={togglePagesDropdown} onMouseLeave={closePagesDropdown}>
-                            <div className='nav-link'>Pages</div>
-                            {pagesDropdownOpen && (
-                                <div className='pages-dropdown' onClick={closePagesDropdown}>
-                                    <Link to="/about" className='pages-dropdown-link' onClick={closeMenu}>About</Link>
-                                    <Link to="/creators" className='pages-dropdown-link' onClick={closeMenu}>Team</Link>
-                                    <Link to="/instructor" className='pages-dropdown-link' onClick={closeMenu}>Instructor</Link>
-                                    <Link to="/error" className='pages-dropdown-link' onClick={closeMenu}>404</Link>
+
+                        {/* Pages Dropdown */}
+                        <div className='li-div pages-li-div'
+                            onMouseEnter={handlePagesMouseEnter}
+                            onMouseLeave={handlePagesMouseLeave}
+                        >
+                            <li className={`pages-li ${pagesDropdownOpen ? 'active' : ''}`}>
+                                <div
+                                    className='nav-link pages-trigger'
+                                    style={{ cursor: 'pointer' }}
+                                    onClick={togglePagesDropdown}
+                                >
+                                    Pages
+                                    <FontAwesomeIcon
+                                        icon={faChevronDown}
+                                        className={`pages-chevron ${pagesDropdownOpen ? 'rotated' : ''}`}
+                                    />
                                 </div>
-                            )}
-                        </li>
-                            </div>                    
+
+                                <div className={`pages-dropdown ${pagesDropdownOpen ? 'show' : ''}`}>
+                                    {pagesLinks.map((page) => (
+                                        <Link
+                                            key={page.to}
+                                            to={page.to}
+                                            className='pages-dropdown-item'
+                                            onClick={() => { closeMenu(); closePagesDropdown(); }}
+                                        >
+                                            {page.label}
+                                        </Link>
+                                    ))}
+                                </div>
+                            </li>
+                        </div>
+
                         <div className='li-div'>
                             <li><Link className='nav-link' to="/contact" onClick={closeMenu}>Contact</Link></li>
                         </div>

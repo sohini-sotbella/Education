@@ -129,7 +129,7 @@ const Home = () => {
         {
             id: 1,
             title: 'Emilee Logan',
-            about : 'Master of Education Degree',
+            about: 'Master of Education Degree',
             imageUrl: creator1,
             course: '08 Courses',
             student: '30 Students',
@@ -137,15 +137,15 @@ const Home = () => {
         {
             id: 2,
             title: 'Donald Logan',
-            about : 'Master of Education Degree',
+            about: 'Master of Education Degree',
             imageUrl: creator2,
-            course : '08 Courses',
+            course: '08 Courses',
             student: '30 Students',
         },
         {
             id: 3,
             title: 'Oliver Porter',
-            about : 'Master of Education Degree',
+            about: 'Master of Education Degree',
             imageUrl: creator3,
             course: '08 Courses',
             student: '30 Students',
@@ -153,7 +153,7 @@ const Home = () => {
         {
             id: 4,
             title: 'Nahla Jones',
-            about : 'Master of Education Degree',
+            about: 'Master of Education Degree',
             imageUrl: creator4,
             course: '08 Courses',
             student: '30 Students',
@@ -167,7 +167,7 @@ const Home = () => {
             user: 'Begrass Tyson',
             imageUrl: blog1,
             calendar: 'April 23,2022',
-            about:'Pluoresnts customize prancing apcentered customer service anding ands asing straelg Interacvely cordinate performe',
+            about: 'Pluoresnts customize prancing apcentered customer service anding ands asing straelg Interacvely cordinate performe',
             read: 'Read More',
             msg: '3',
         },
@@ -177,7 +177,7 @@ const Home = () => {
             user: 'Begrass Tyson',
             imageUrl: blog2,
             calendar: 'April 23,2022',
-            about:'Pluoresnts customize prancing apcentered customer service anding ands asing straelg Interacvely cordinate performe',
+            about: 'Pluoresnts customize prancing apcentered customer service anding ands asing straelg Interacvely cordinate performe',
             read: 'Read More',
             msg: '4',
         },
@@ -187,12 +187,20 @@ const Home = () => {
             user: 'Begrass Tyson',
             imageUrl: blog3,
             calendar: 'April 23,2022',
-            about:'Pluoresnts customize prancing apcentered customer service anding ands asing straelg Interacvely cordinate performe',
+            about: 'Pluoresnts customize prancing apcentered customer service anding ands asing straelg Interacvely cordinate performe',
             read: 'Read More',
             msg: '6',
         },
     ];
 
+    const logos = [
+        { src: grab, alt: "grab" },
+        { src: netflix, alt: "netflix" },
+        { src: google, alt: "google" },
+        { src: nestle, alt: "nestle" },
+        { src: disney, alt: "disney" },
+        { src: airbnb, alt: "airbnb" },
+    ];
 
     return (
         <>
@@ -220,41 +228,40 @@ const Home = () => {
                     </div>
                 </div>
 
-                <div className='slide-container'>
-                    <div className='img-sliding'>
-                        <div className='slide-img'><img src={grab} alt="grab" /></div>
-                        <div className='slide-img'><img src={netflix} alt="netflix" /></div>
-                        <div className='slide-img'><img src={google} alt="google" /></div>
-                        <div className='slide-img'><img src={nestle} alt="nestle" /></div>
-                        <div className='slide-img'><img src={disney} alt="disney" /></div>
-                        <div className='slide-img'><img src={airbnb} alt="airbnb" /></div>
+                <div className="slide-container">
+                    <div className="img-sliding">
+                        {[...logos, ...logos].map((logo, index) => (
+                            <div className="slide-img" key={index}>
+                                <img src={logo.src} alt={logo.alt} />
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
 
             {/* Category section start*/}
             <div className="category-container">
-      <div className="category-header">
-    <h3>POPULAR CATEGORY</h3>
-    <h1>Popular Category For Learn</h1>
-    </div>
-    <div className="catergories">
-        <div className='category-box'><img src={category1} alt="computer science" className='category-img' /><h4><Link to="/courses">Computer Science</Link></h4><span className='cs-span'>24 Courses</span></div>
-        <div className='category-box'><img src={category2} alt="civil engg"  className='category-img'/><h4><Link to="/courses">Civil Engineering</Link></h4><span className='ce-span'>04 Courses</span></div>
-        <div className='category-box'><img src={category3} alt="business analysis"  className='category-img'/><h4><Link to="/courses">Business Analysis</Link></h4><span className='ba-span'>27 Courses</span></div>
-        <div className='category-box'><img src={category4} alt="data structure analytics" className='category-img' /><h4><Link to="/courses">Data Structure Analytics</Link></h4><span className='dsa-span'>28 Courses</span></div>
-        <div className='category-box'><img src={category5} alt="learning management" className='category-img' /><h4><Link to="/courses">Learning Management</Link></h4><span className='lm-span'>78 Courses</span></div>
-        <div className='category-box'><img src={category6} alt="computer engineering" className='category-img' /><h4><Link to="/courses">Computer Engineering</Link></h4><span className='ceg-span'>38 Courses</span></div>
-    </div>
-    <div className='browse-container'><button className="browse-btn"><Link to="/courses" className='browse-link'>Browse All Categories</Link></button></div>
-</div>
-             {/* Category section end*/}
+                <div className="category-header">
+                    <h3>POPULAR CATEGORY</h3>
+                    <h1>Popular Category For Learn</h1>
+                </div>
+                <div className="catergories">
+                    <div className='category-box'><img src={category1} alt="computer science" className='category-img' /><h4><Link to="/courses">Computer Science</Link></h4><span className='cs-span'>24 Courses</span></div>
+                    <div className='category-box'><img src={category2} alt="civil engg" className='category-img' /><h4><Link to="/courses">Civil Engineering</Link></h4><span className='ce-span'>04 Courses</span></div>
+                    <div className='category-box'><img src={category3} alt="business analysis" className='category-img' /><h4><Link to="/courses">Business Analysis</Link></h4><span className='ba-span'>27 Courses</span></div>
+                    <div className='category-box'><img src={category4} alt="data structure analytics" className='category-img' /><h4><Link to="/courses">Data Structure Analytics</Link></h4><span className='dsa-span'>28 Courses</span></div>
+                    <div className='category-box'><img src={category5} alt="learning management" className='category-img' /><h4><Link to="/courses">Learning Management</Link></h4><span className='lm-span'>78 Courses</span></div>
+                    <div className='category-box'><img src={category6} alt="computer engineering" className='category-img' /><h4><Link to="/courses">Computer Engineering</Link></h4><span className='ceg-span'>38 Courses</span></div>
+                </div>
+                <div className='browse-container'><button className="browse-btn"><Link to="/courses" className='browse-link'>Browse All Categories</Link></button></div>
+            </div>
+            {/* Category section end*/}
 
-{/* Course section start */}
-<div className="course-container">
+            {/* Course section start */}
+            <div className="course-container">
                 <div className="course-header">
-                <h3>FEATURED COURSES</h3>
-                <h1>Pick A Course To Get Started</h1>
+                    <h3>FEATURED COURSES</h3>
+                    <h1>Pick A Course To Get Started</h1>
                 </div>
                 <div className="course-grid">
                     {courses.map(course => (
@@ -274,10 +281,10 @@ const Home = () => {
                     ))}
                 </div>
             </div>
-{/* Course section end */}
+            {/* Course section end */}
 
-{/* About section start */}
-<div className='about-container'>
+            {/* About section start */}
+            <div className='about-container'>
                 <div className="about-img">
                     <img src={aboutimg} alt="about-img" />
                 </div>
@@ -314,15 +321,15 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-{/* About section end */}
+            {/* About section end */}
 
-{/* Creators section Start */}
-<div className='creators-container'>
+            {/* Creators section Start */}
+            <div className='creators-container'>
                 <div className="creators-header">
                     <h3>WORLD-CLASS INSTRUCTORS</h3>
                     <h1>Classes Taught By Real Creators</h1>
                 </div>
-                
+
                 <div className="creators-grid">
                     {creatorsData.map(creator => (
                         <div key={creator.id}>
@@ -336,17 +343,17 @@ const Home = () => {
                             />
                         </div>
                     ))}
-                </div>  
+                </div>
                 <div className='content'>
                     <span>Want to help people learn, grow and achieve more in life? </span>
                     <span><Link>Become an instructor </Link></span>
-                </div>           
+                </div>
             </div>
-{/* Creators section end */}
+            {/* Creators section end */}
 
 
-{/* Feedback section start */}
-<div className='feedback-container'>
+            {/* Feedback section start */}
+            <div className='feedback-container'>
                 <div className="feedback-header">
                     <h3>LOVED BY 200,000+ STUDENTS</h3>
                     <h1>Students Community Feedback</h1>
@@ -358,7 +365,7 @@ const Home = () => {
                         </div>
                         <div className='video-icon'>
                             <a href="https://youtu.be/MU3qrgR2Kkc">
-                                <FontAwesomeIcon icon={faPlay} className='v-icon'/></a>
+                                <FontAwesomeIcon icon={faPlay} className='v-icon' /></a>
                         </div>
                     </div>
                     <div className="community-container">
@@ -406,10 +413,10 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-{/* Feedback section end */}
+            {/* Feedback section end */}
 
-{/* Blog section start */}
-<div className='blog-container'>
+            {/* Blog section start */}
+            <div className='blog-container'>
                 <div className="blog-header">
                     <h3>FORM OUR BLOG POSTS</h3>
                     <h1>More Articles From Resource Library</h1>
@@ -431,52 +438,52 @@ const Home = () => {
                     ))}
                 </div>
             </div>
-{/* Blog section end */}
+            {/* Blog section end */}
 
-{/* Achieve section Start */}
-<div className='achieve-container'>
-        <div className="achieve-header">
-            <h3>START TO SUCCESS</h3>
-            <h1>Achieve Your Goals With Edukon</h1>
-        </div>
-        <div className="how-achieve">
-            <div className='achieve-count'>
-            <h1>30+</h1>
-            <p>Years of Language Education Experience</p>
+            {/* Achieve section Start */}
+            <div className='achieve-container'>
+                <div className="achieve-header">
+                    <h3>START TO SUCCESS</h3>
+                    <h1>Achieve Your Goals With Edukon</h1>
+                </div>
+                <div className="how-achieve">
+                    <div className='achieve-count'>
+                        <h1>30+</h1>
+                        <p>Years of Language Education Experience</p>
+                    </div>
+                    <div className='achieve-count'>
+                        <h1>3034+</h1>
+                        <p>Years of Language Education Experience</p>
+                    </div>
+                    <div className='achieve-count'>
+                        <h1>330+</h1>
+                        <p>Years of Language Education Experience</p>
+                    </div>
+                    <div className='achieve-count'>
+                        <h1>2300+</h1>
+                        <p>Years of Language Education Experience</p>
+                    </div>
+                </div>
+                <div className="achieve-inner">
+                    <div className="achieve-inner-box1">
+                        <div className='h-and-p'>
+                            <h2>Start Teaching Today</h2>
+                            <p>Seamlessly engage technically sound coaborative reintermed goal oriented content rather than ethica</p>
+                            <button className='instructor-btn'>Become A Instructor</button>
+                        </div>
+                        <div></div>
+                    </div>
+                    <div className="achieve-inner-box2">
+                        <div className='h-and-p'>
+                            <h2>If You Join Our Course</h2>
+                            <p>Seamlessly engage technically sound coaborative reintermed goal oriented content rather than ethica</p>
+                            <button className='register-btn'>Register For Free</button>
+                        </div>
+                        <div></div>
+                    </div>
+                </div>
             </div>
-            <div className='achieve-count'>
-            <h1>3034+</h1>
-            <p>Years of Language Education Experience</p>
-            </div>
-            <div className='achieve-count'>
-            <h1>330+</h1>
-            <p>Years of Language Education Experience</p>
-            </div>
-            <div className='achieve-count'>
-            <h1>2300+</h1>
-            <p>Years of Language Education Experience</p>
-            </div>
-        </div>
-        <div className="achieve-inner">
-        <div className="achieve-inner-box1">
-            <div className='h-and-p'>
-            <h2>Start Teaching Today</h2>
-            <p>Seamlessly engage technically sound coaborative reintermed goal oriented content rather than ethica</p>
-            <button className='instructor-btn'>Become A Instructor</button>
-            </div>
-            <div></div>
-        </div>
-        <div className="achieve-inner-box2">
-            <div className='h-and-p'>
-            <h2>If You Join Our Course</h2>
-            <p>Seamlessly engage technically sound coaborative reintermed goal oriented content rather than ethica</p>
-            <button className='register-btn'>Register For Free</button>
-            </div>
-            <div></div>
-        </div>
-        </div>
-    </div>
-{/* Achieve section end */}
+            {/* Achieve section end */}
         </>
     )
 }

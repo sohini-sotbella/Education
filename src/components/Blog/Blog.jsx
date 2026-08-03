@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Blog.css';
 import BlogCard from './BlogCard';
 import blog1 from '../../assets/images/blog/01.jpg';
@@ -15,6 +15,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight, faFilter } from '@fortawesome/free-solid-svg-icons';
 
 const Blog = () => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 6;
 
     const blogs = [
         {
@@ -109,6 +111,30 @@ const Blog = () => {
         },
     ];
 
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentBlogs = blogs.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(blogs.length / itemsPerPage);
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    const handlePrevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    };
+
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    };
+
     return (
         <>
         <div className="blog-top-bg-container">
@@ -124,7 +150,7 @@ const Blog = () => {
                 </div>
             <div className='blog-container'>
                 <div className="blog-grid">
-                    {blogs.map(blog => (
+                    {currentBlogs.map(blog => (
                         <div key={blog.id}>
                             <BlogCard
                                 key={blog.id}
@@ -140,15 +166,21 @@ const Blog = () => {
                     ))}
                 </div>
                 <div className="blog-pagination">
-                <a href="#">
+                <button onClick={handlePrevPage} disabled={currentPage === 1} className={currentPage === 1 ? 'disabled' : ''}>
                 <FontAwesomeIcon icon={faAngleLeft} />
-                </a>
-                <a href="#">01</a>
-                <a href="#" className="active">02</a>
-                <a href="#">03</a>
-                <a href="#">
+                </button>
+                {[...Array(totalPages)].map((_, index) => (
+                    <button 
+                        key={index + 1} 
+                        onClick={() => handlePageChange(index + 1)}
+                        className={currentPage === index + 1 ? 'active' : ''}
+                    >
+                        {index + 1}
+                    </button>
+                ))}
+                <button onClick={handleNextPage} disabled={currentPage === totalPages} className={currentPage === totalPages ? 'disabled' : ''}>
                 <FontAwesomeIcon icon={faAngleRight} />
-                </a>
+                </button>
             </div>
             </div>            
         </>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Contact.css';
 import { Link } from 'react-router-dom';
 import location from '../../assets/images/icon/01.png'
@@ -7,6 +7,39 @@ import email from '../../assets/images/icon/03.png'
 import website from '../../assets/images/icon/04.png'
 
 const Contact = () => {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        mobile: '',
+        subject: '',
+        message: ''
+    });
+    const [submitted, setSubmitted] = useState(false);
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Form submitted:', formData);
+        setSubmitted(true);
+        setTimeout(() => {
+            setSubmitted(false);
+            setFormData({
+                name: '',
+                email: '',
+                mobile: '',
+                subject: '',
+                message: ''
+            });
+        }, 3000);
+    };
+
     return (
         <>
             <div className="top-bg-contact-container">
@@ -98,16 +131,23 @@ const Contact = () => {
                 </div>
                 <div className="contact-us">
                     <div className="inner-container">
-                        <div className="name-email-mobile-sub">
-                            <div><input type="text" placeholder='Your Name *'/></div>
-                            <div><input type="email" placeholder='Your EMail *'/></div>
-                        </div>
-                        <div className="name-email-mobile-sub">
-                            <div><input type="number" placeholder='Mobile Number *'/></div>
-                            <div><input type="text" placeholder='Your Subject *'/></div>
-                        </div>
-                        <textarea placeholder='Your Message'></textarea>
-                        <button><a href="#">Send Our Message</a></button>
+                        <form onSubmit={handleSubmit}>
+                            <div className="name-email-mobile-sub">
+                                <div><input type="text" name="name" placeholder='Your Name *' value={formData.name} onChange={handleInputChange} required/></div>
+                                <div><input type="email" name="email" placeholder='Your EMail *' value={formData.email} onChange={handleInputChange} required/></div>
+                            </div>
+                            <div className="name-email-mobile-sub">
+                                <div><input type="number" name="mobile" placeholder='Mobile Number *' value={formData.mobile} onChange={handleInputChange} required/></div>
+                                <div><input type="text" name="subject" placeholder='Your Subject *' value={formData.subject} onChange={handleInputChange} required/></div>
+                            </div>
+                            <textarea name="message" placeholder='Your Message' value={formData.message} onChange={handleInputChange} required></textarea>
+                            <button type="submit">Send Our Message</button>
+                        </form>
+                        {submitted && (
+                            <div className="success-message">
+                                <p>Thank you! Your message has been sent successfully.</p>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
