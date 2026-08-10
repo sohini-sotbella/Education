@@ -2,16 +2,30 @@ import React, { useState } from 'react';
 import './Register-Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
+import { submitGoogleSheetForm } from '../../services/googleSheetsApi';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [status, setStatus] = useState({ message: '', type: '' });
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Form submitted:', { email, password });
-        navigate('/profile'); // Redirect to profile page
+        setStatus({ message: '', type: '' });
+
+        try {
+            await submitGoogleSheetForm('login', {
+                email,
+            });
+
+            setStatus({ message: 'Login activity recorded successfully. Redirecting...', type: 'success' });
+            setTimeout(() => {
+                navigate('/profile');
+            }, 800);
+        } catch (error) {
+            setStatus({ message: error.message || 'Failed to record login activity.', type: 'error' });
+        }
     };
 
     return (
@@ -63,6 +77,11 @@ const Login = () => {
                         Submit Now
                     </button>
                 </div>
+                {status.message && (
+                  <div className={status.type === 'error' ? 'error-message' : 'success-message'}>
+                    <p>{status.message}</p>
+                  </div>
+                )}
                 <div className='link-btn'>
                     <Link to='/register'>Don't have an account? Register</Link>
                 </div>

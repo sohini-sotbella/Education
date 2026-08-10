@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Contact.css';
 import { Link } from 'react-router-dom';
+import { submitGoogleSheetForm } from '../../services/googleSheetsApi';
 import location from '../../assets/images/icon/01.png'
 import phone from '../../assets/images/icon/02.png'
 import email from '../../assets/images/icon/03.png'
@@ -15,6 +16,7 @@ const Contact = () => {
         message: ''
     });
     const [submitted, setSubmitted] = useState(false);
+    const [status, setStatus] = useState({ message: '', type: '' });
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -24,20 +26,30 @@ const Contact = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Form submitted:', formData);
-        setSubmitted(true);
-        setTimeout(() => {
-            setSubmitted(false);
-            setFormData({
-                name: '',
-                email: '',
-                mobile: '',
-                subject: '',
-                message: ''
+        setStatus({ message: '', type: '' });
+
+        try {
+            await submitGoogleSheetForm('contact', {
+                name: formData.name,
+                email: formData.email,
+                phone: formData.mobile,
+                subject: formData.subject,
+                message: formData.message,
             });
-        }, 3000);
+
+            setSubmitted(true);
+            setStatus({ message: 'Thank you! Your message has been sent successfully.', type: 'success' });
+            setFormData({ name: '', email: '', mobile: '', subject: '', message: '' });
+
+            setTimeout(() => {
+                setSubmitted(false);
+                setStatus({ message: '', type: '' });
+            }, 3000);
+        } catch (error) {
+            setStatus({ message: error.message || 'Unable to send message. Please try again.', type: 'error' });
+        }
     };
 
     return (
@@ -143,9 +155,9 @@ const Contact = () => {
                             <textarea name="message" placeholder='Your Message' value={formData.message} onChange={handleInputChange} required></textarea>
                             <button type="submit">Send Our Message</button>
                         </form>
-                        {submitted && (
-                            <div className="success-message">
-                                <p>Thank you! Your message has been sent successfully.</p>
+                        {status.message && (
+                            <div className={status.type === 'error' ? 'error-message' : 'success-message'}>
+                                <p>{status.message}</p>
                             </div>
                         )}
                     </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Register-Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa";
+import { submitGoogleSheetForm } from '../../services/googleSheetsApi';
 
 const Register = () => {
     const [password, setPassword] = useState('');
@@ -9,12 +10,47 @@ const Register = () => {
     const [fullname, setFullName] = useState("");
     const [mobilenumber, setMobileNumber] = useState("");
     const [email, setEmail] = useState("");
+    const [status, setStatus] = useState({ message: '', type: '' });
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-            console.log('Form submitted:', { fullname, mobilenumber, email, password });
-            navigate('/profile'); // Redirect to profile page
+        setStatus({ message: '', type: '' });
+
+        if (!passwordValid) {
+            setStatus({ message: 'Please enter a stronger password before continuing.', type: 'error' });
+            return;
+        }
+
+        setLoading(true);
+        const payload = {
+            fullName: fullname,
+            email,
+            phone: mobilenumber,
+        };
+
+        console.debug('[Register] submit payload:', payload);
+
+        try {
+            await submitGoogleSheetForm('signup', payload, { timeout: 15000 });
+
+            setStatus({ message: 'Signup recorded successfully. Redirecting...', type: 'success' });
+            // Clear local fields (never send password)
+            setPassword('');
+            setFullName('');
+            setMobileNumber('');
+            setEmail('');
+
+            setTimeout(() => {
+                navigate('/profile');
+            }, 800);
+        } catch (error) {
+            console.error('[Register] submit error', error);
+            setStatus({ message: error.message || 'Failed to submit signup form.', type: 'error' });
+        } finally {
+            setLoading(false);
+        }
     };
 
     const handlePasswordChange = (e) => {
@@ -53,8 +89,15 @@ const Register = () => {
                     )}
                 </div>
                 <div className="btn-box">
-                    <button className='form-submit' type='submit'>Get Started Now</button>
+                    <button className='form-submit' type='submit' disabled={loading}>
+                        {loading ? 'Submitting...' : 'Get Started Now'}
+                    </button>
                 </div>
+                {status.message && (
+                    <div className={status.type === 'error' ? 'error-message' : 'success-message'}>
+                        <p>{status.message}</p>
+                    </div>
+                )}
                 <div className='link-btn'>
                     <Link to='/login'>Are you a member? Login</Link>
                 </div>

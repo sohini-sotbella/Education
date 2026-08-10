@@ -2,20 +2,33 @@ import React, { useState } from 'react';
 import './Footer.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { submitGoogleSheetForm } from '../../services/googleSheetsApi';
 
 const Footer = () => {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [status, setStatus] = useState({ message: '', type: '' });
 
-  const handleSubscribe = (e) => {
+  const handleSubscribe = async (e) => {
     e.preventDefault();
-    if (email.trim()) {
+    setStatus({ message: '', type: '' });
+
+    if (!email.trim()) {
+      setStatus({ message: 'Please enter an email address to subscribe.', type: 'error' });
+      return;
+    }
+
+    try {
+      await submitGoogleSheetForm('subscribers', { email });
       setSubscribed(true);
       setEmail('');
-      // Reset back to subscribe form after 2 seconds
+      setStatus({ message: 'Thank you for subscribing!', type: 'success' });
       setTimeout(() => {
         setSubscribed(false);
+        setStatus({ message: '', type: '' });
       }, 2000);
+    } catch (error) {
+      setStatus({ message: error.message || 'Subscription failed.', type: 'error' });
     }
   };
 
@@ -46,6 +59,11 @@ const Footer = () => {
                   <p className="thank-you-title">Thank You for Subscribing!</p>
                   <p className="thank-you-sub">You're now on our list. Expect great things in your inbox!</p>
                 </div>
+              </div>
+            )}
+            {status.message && status.type === 'error' && (
+              <div className="error-message subscribe-error">
+                <p>{status.message}</p>
               </div>
             )}
           </div>
