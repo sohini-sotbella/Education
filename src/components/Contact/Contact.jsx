@@ -145,12 +145,12 @@ const Contact = () => {
                     <div className="inner-container">
                         <form onSubmit={handleSubmit}>
                             <div className="name-email-mobile-sub">
-                                <div><input type="text" name="name" placeholder='Your Name *' value={formData.name} onChange={handleInputChange} required/></div>
-                                <div><input type="email" name="email" placeholder='Your EMail *' value={formData.email} onChange={handleInputChange} required/></div>
+                                <div><input type="text" name="name" placeholder='Your Name *' value={formData.name} onChange={handleInputChange} required /></div>
+                                <div><input type="email" name="email" placeholder='Your EMail *' value={formData.email} onChange={handleInputChange} required /></div>
                             </div>
                             <div className="name-email-mobile-sub">
-                                <div><input type="number" name="mobile" placeholder='Mobile Number *' value={formData.mobile} onChange={handleInputChange} required/></div>
-                                <div><input type="text" name="subject" placeholder='Your Subject *' value={formData.subject} onChange={handleInputChange} required/></div>
+                                <div><input type="number" name="mobile" placeholder='Mobile Number *' value={formData.mobile} onChange={handleInputChange} required /></div>
+                                <div><input type="text" name="subject" placeholder='Your Subject *' value={formData.subject} onChange={handleInputChange} required /></div>
                             </div>
                             <textarea name="message" placeholder='Your Message' value={formData.message} onChange={handleInputChange} required></textarea>
                             <button type="submit">Send Our Message</button>
