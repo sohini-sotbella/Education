@@ -1,6 +1,9 @@
 const GOOGLE_SHEETS_SCRIPT_URL =
   'https://script.google.com/macros/s/AKfycbxhk0VGfVlMGvJHNQOgYE8ShlYkMCKXWXmJZTRPPr6mSbSvtI85ovcgBobL2fGU7MRTyQ/exec';
 
+  const GOOGLE_SHEETS_LINK =
+  'https://docs.google.com/spreadsheets/d/1UmuUbS066CIb1rZCyY_C_fD2tI92Khseni6vl4ppa-w/edit?gid=762924239#gid=762924239'
+
 const removeSensitiveFields = (data) => {
   const copy = { ...data };
 
